@@ -1,0 +1,17 @@
+
+*{
+   padding: 0;
+   margin: 0;
+}
+body {
+   background-color: rgb(245, 245, 245) !important;
+}
+a:any-link {
+   text-decoration: none;
+}
+
+$primary: #24A19C;
+$secondary : #D96098;
+
+@import "bootstrap";
+@import'~bootstrap/dist/css/bootstrap.css';
