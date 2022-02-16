@@ -1,5 +1,5 @@
 <template>
-   <div class="container">
+   <div class="container px-4">
       <div class="row">
          <form @submit.prevent="submitForm()" ref="form" class="col-12 col-md-8 offset-md-2 shadow-lg rounded-3 p-4 bg-white">
             <h1 class="text-primary h-3 py-3">Add Event</h1>

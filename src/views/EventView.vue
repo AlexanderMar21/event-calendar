@@ -6,7 +6,7 @@
                   <img class="img-responsive w-100" :src="event.picture" alt="Event">
                </div>
 
-               <div class="col-12 col-lg-6">
+               <div class="col-12 col-lg-6 mt-5 mt-lg-0">
                   <h1 class="h1 text-primary b-3">{{ event.title }}</h1>
                   <h6>{{ event.eventType }}</h6><br>
                   <p>Description<br> {{ event.description}}</p>
