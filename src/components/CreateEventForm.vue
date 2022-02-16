@@ -1,7 +1,7 @@
 <template>
    <div class="container">
       <div class="row">
-         <form @submit.prevent="submitForm()" class="col-12 col-md-8 offset-md-2 shadow-lg rounded-3 p-4 bg-white">
+         <form @submit.prevent="submitForm()" ref="form" class="col-12 col-md-8 offset-md-2 shadow-lg rounded-3 p-4 bg-white">
             <h1 class="text-primary h-3 py-3">Add Event</h1>
             <div class="row">
 
@@ -38,11 +38,16 @@
                </div>
                <div class="mb-4 col-12 relative col-sm-6">
                   <label for="event-picture" class="form-label">Picture</label>
-                  <input ref="picture" @change="onFileChange" type="file" class="form-control" id="event-picture"/>
-                  <!-- <small v-if="v$.description.$error" class="text-danger form-error">
-                     {{ v$.description.$errors[0].$message }}
-                  </small> -->
+                  <input ref="picture" @change="onFileChange" type="file" class="form-control" id="event-picture" accept="image/png, image/jpeg"/>
+                  <small v-if="v$.picture.$error" class="text-danger form-error">
+                     {{ v$.picture.$errors[0].$message }}
+                  </small>
                </div>
+               <!-- image preview -->
+               <div class="mb-4 col-12 relative col-sm-6">
+                  <img v-if="event.picture" :src="event.picture" class="img-responsive w-100" style="width:auto;max-width:100%;max-height:250px; object-fit:cover;"/>
+               </div>
+
                <div class="mb-4 col-12 relative col-sm-6">
                   <label for="event-type" class="form-label">Type</label>
                   <select v-model="event.eventType" name="type" class="form-control" id="event-type">
@@ -54,6 +59,7 @@
                      {{ v$.type.$eventType[0].$message }}
                   </small>
                </div>
+
                <div class="mb-4 col-12 relative col-sm-6">
                   <label for="event-contact-tel" class="form-label">Contact Tel.</label>
                   <input  v-model="event.telephone" placeholder="+12 3456 78900" type="text" class="form-control" id="event-contact-tel"/>
@@ -61,6 +67,7 @@
                      {{ v$.telephone.$errors[0].$message }}
                   </small>
                </div>
+
                <div class="mb-4 col-12 relative col-sm-6">
                   <label for="event-contact-email" class="form-label">Contact email.</label>
                   <input  v-model="event.email" type="email" placeholder="smith@example.com" class="form-control" id="event-contact-email"/>
@@ -68,6 +75,7 @@
                      {{ v$.email.$errors[0].$message }}
                   </small>
                </div>
+
                <div class="mb-4 col-12 relative col-sm-6">
                   <label for="event-location" class="form-label">Location</label>
                   <input v-model="event.location" type="text" class="form-control" id="location"/>
@@ -83,14 +91,14 @@
    </div>
 </template>
 <script>
-import { reactive, computed } from 'vue'
+import { reactive, computed} from 'vue'
 import useVuelidate from "@vuelidate/core"
 import { required, email, minLength } from "@vuelidate/validators"
 
 export default {
   name: 'CreateEventForm',
    setup(){
-      const event = reactive ({
+      const initialForm = {
          title: "",
          date: "",
          time: "",
@@ -100,7 +108,12 @@ export default {
          telephone: "",
          email: "",
          location: "",
-      })
+      }
+      const event = reactive ({...initialForm});
+
+      const resetForm = ()=>{
+         Object.assign(event, initialForm);
+      }
 
       const rules = computed(() => {
          return {
@@ -110,29 +123,37 @@ export default {
             description: { required,  minLength: minLength(15)  },
             picture: { required },
             eventType: { required },
-            telephone: { required },
+            telephone: { required, minLength: minLength(8) },
             email: { required, email },
-            location: { required },
+            location: { required, minLength: minLength(5) },
          }
       })
       const v$ = useVuelidate(rules, event);
 
-      return { event, v$ }
+      const onFileChange = (e)=> {
+         if(!e.target.files[0]) return;
+
+         const file = e.target.files[0];
+         event.picture = URL.createObjectURL(file);
+      }
+
+
+      return { event, v$, onFileChange, resetForm }
    },
    methods: {
-      async submitForm()
+      submitForm()
       {
-         this.v$.$validate()
-         if(this.v$.$error){
-            console.log("tets")
-            await this.$store.dispatch("storeEvent", this.event);
-         }else {
-            console.log("faild")
+         this.v$.$validate();
+         if (this.v$.$error){
+            return;
          }
+         this.$store.dispatch("storeEvent", this.event).then(() => {
+            this.$refs.picture.value=null;
+            this.v$.$reset();
+            this.resetForm();
+         })
+
       },
-      onFileChange(event){
-         console.log(event.target.files);
-      }
    }
 };
 

@@ -13,15 +13,20 @@ const routes = [
     component: () => import('../views/Events.vue')
   },
   {
-    path: '/:pathMatch(.*)*',
-    name: '404',
-    component: () => import('../views/NotFound.vue')
+    path: '/events/:id',
+    name: 'Event',
+    component: () => import('../views/EventView.vue')
   },
   {
     path: '/events/store',
     name: 'CreateEvent',
     component: () => import('../components/CreateEventForm.vue')
-  }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: () => import('../views/NotFound.vue')
+  },
 ]
 
 const router = createRouter({

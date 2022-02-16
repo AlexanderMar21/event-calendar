@@ -18,14 +18,19 @@ const eventsStore = {    // vuex example
       async loadEvents({commit}){
             try{
                const  data  = ( await axios.get("/api/v1/events")).data;
-               commit("setEvents", data.events);
+               commit("setEvents", data);
             }catch (error) {
-               //
+               console.error(error);
             }
       },
       async storeEvent({commit}, payload) {
+         const options = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+         };
          try{
-            const data = ( await axios.post("/api/v1/events/index", payload)).data;
+            const data = ( await axios.post("/api/v1/events", payload, options)).data;
             commit("setEvent", data);
          }catch (error) {
             //
@@ -34,8 +39,8 @@ const eventsStore = {    // vuex example
    },
    getters:{
       //
-      allEvents(state) {
-         return state.organizations;
+      getEvents(state) {
+         return state.events;
       },
 
    }
