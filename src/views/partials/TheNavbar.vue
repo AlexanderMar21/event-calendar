@@ -7,7 +7,7 @@
             </router-link>
             <div class="text-white">
                <router-link class="text-white mx-3 fs-4" :to="{ name: 'Events' }">EVENTS</router-link>
-               <!-- <router-link class="text-white mx-3 fs-4" :to="{ name: 'CreateEvent' }">CREATE</router-link> -->
+               <router-link class="text-white mx-3 fs-4" :to="{ name: 'CreateEvent' }">CREATE</router-link>
             </div>
          </div>
       </div>
