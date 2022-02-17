@@ -7,7 +7,7 @@
          <div class="col-md-8">
             <div class="card-body">
                <h5 class="card-title h2">{{ event.title }}</h5>
-               <h4 class="">{{ event.eventType }}</h4>
+               <h4 class="h6">{{ event.eventType }}</h4>
                <p class="card-text">{{ event.description }}</p>
                <p class="card-text"><small class="text-muted">{{ event.date }} {{ event.time }}</small></p>
             </div>
