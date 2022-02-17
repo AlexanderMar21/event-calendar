@@ -1,7 +1,7 @@
 <template>
    <section class="container">
       <div class="container">
-         <div class="row">
+         <div v-if="!loading" class="row">
                <div class="col-12 col-lg-6">
                   <img class="img-responsive w-100" :src="event.picture" alt="Event">
                </div>
@@ -17,30 +17,39 @@
                   </p>
                </div>
          </div>
+
+         <div v-else-if="loading" class="shadow-lg rounded-3 px-5 py-3">
+            <h4 class="text-primary h2">Loading...</h4>
+         </div>
+
       </div>
    </section>
 </template>
 
 <script>
 import axios from "axios";
-import { useRoute } from 'vue-router'
-import { onMounted , ref} from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { onBeforeMount, ref} from 'vue'
 export default {
 
    setup() {
       const route = useRoute();
+      const router = useRouter();
       const event = ref({});
+      const loading = ref(false);
 
-      onMounted(async ()=>{
+      onBeforeMount(async ()=>{
+         loading.value = true;
          try{
             const data  = ( await axios.get("/api/v1/events/" + route.params.id )).data;
             event.value = data;
          }catch (error) {
-            console.error(error);
+            router.push({name:"404"});
          }
+         loading.value = false;
       })
 
-      return { event };
+      return { event, loading };
    },
 }
 </script>

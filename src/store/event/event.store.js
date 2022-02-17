@@ -29,6 +29,7 @@ const eventsStore = {    // vuex example
                 'Content-Type': 'multipart/form-data'
             }
          };
+
          try{
             const data = ( await axios.post("/api/v1/events", payload, options)).data;
             commit("setEvent", data);
@@ -38,7 +39,6 @@ const eventsStore = {    // vuex example
       }
    },
    getters:{
-      //
       getEvents(state) {
          return state.events;
       },

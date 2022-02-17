@@ -152,12 +152,12 @@ export default {
             this.v$.$reset();
             this.resetForm();
          })
-
       },
    }
 };
 
 </script>
+
 <style>
 .relative {
    position: relative;
