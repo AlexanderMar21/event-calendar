@@ -4,7 +4,8 @@
       <div class="home d-flex flex-column align-items-center justify-content-center p-5 shadow-lg rounded-3">
           <h2 class="display-2">Explore all events</h2>
           <div>
-            <router-link class="btn btn-primary text-white" :to="{ name: 'Events' }">EVENTS</router-link>
+            <router-link class="btn btn-primary text-white" :to="{ name: 'Events' }">EXPLORE</router-link><span class="px-2"> OR </span>
+            <router-link class="btn btn-secondary text-white" :to="{ name: 'CreateEvent' }">CREATE EVENT</router-link>
           </div>
       </div>
   </div>
