@@ -14,8 +14,8 @@
                </div>
 
                <div class="mb-4 col-12 relative col-sm-6">
-                  <label for="event-title" class="form-label">Date</label>
-                  <input v-model="event.date" type="date" class="form-control" id="event-title"/>
+                  <label for="event-date" class="form-label">Date</label>
+                  <input v-model="event.date" type="date" class="form-control" id="event-date"/>
                    <small v-if="v$.date.$error" class="text-danger form-error">
                      {{ v$.date.$errors[0].$message }}
                   </small>
