@@ -2,7 +2,7 @@
    <section class="container">
       <div class="d-flex justify-content-between align-items-start">
          <h1 class="display-4 text-primary">All the coolest events</h1>
-         <router-link class="btn btn-primary text-white" :to="{ name: 'CreateEvent' }">Add Event</router-link>
+         <router-link data-test="add-event-btn" class="btn btn-primary text-white" :to="{ name: 'CreateEvent' }">Add Event</router-link>
       </div>
       <div class="mb-4 col-12 relative col-sm-3">
          <label for="event-type" class="form-label">Filter Events</label>
@@ -17,7 +17,7 @@
 
       <div class="container mt-5">
          <div v-if="filteredEvents.length > 0" class="row">
-            <div class="col-12 col-lg-6" style="cursor:pointer" v-for="event in filteredEvents" :key="event.id" @click="navigate(event.id)">
+            <div class="col-12 col-lg-6" data-test="event-item" style="cursor:pointer" v-for="event in filteredEvents" :key="event.id" @click="navigate(event.id)">
                <EventItem :event="event" />
             </div>
          </div>
