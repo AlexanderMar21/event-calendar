@@ -1,10 +1,10 @@
-import { Server, Response } from 'miragejs'
+import { createServer, Response } from 'miragejs'
 import events from './data.json'
 
 export function makeServer({ environment = 'development' } = {}) {
    let data = [...events];
 
-   let server = new Server({
+   let server = new createServer({
     environment,
 
     routes() {
