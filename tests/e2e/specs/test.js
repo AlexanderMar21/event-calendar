@@ -3,6 +3,7 @@ import { makeServer } from "../../../src/mock/mockapi.js"
 describe('Events List', () => {
   beforeEach(() => {
     server = makeServer({ environment: "test" })
+    cy.viewport(1000, 1000)
     // cy.visit('/')
   })
 
