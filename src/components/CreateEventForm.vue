@@ -1,13 +1,13 @@
 <template>
    <div class="container px-4">
       <div class="row">
-         <form @submit.prevent="submitForm()" ref="form" class="col-12 col-md-8 offset-md-2 shadow-lg rounded-3 p-4 bg-white">
+         <form @submit.prevent="submitForm()" data-test="form" ref="form" class="col-12 col-md-8 offset-md-2 shadow-lg rounded-3 p-4 bg-white">
             <h1 class="text-primary h-3 py-3">Add Event</h1>
             <div class="row">
 
                <div class="mb-4 col-12 relative">
                   <label for="event-title" class="form-label">Title</label>
-                  <input v-model="event.title" type="text" class="form-control" id="event-title"/>
+                  <input data-test="event-title" v-model="event.title" type="text" class="form-control" id="event-title"/>
                   <small v-if="v$.title.$error" class="text-danger form-error">
                      {{ v$.title.$errors[0].$message }}
                   </small>
@@ -31,7 +31,7 @@
 
                <div class="mb-4 col-12 relative">
                   <label for="event-desc" class="form-label">Description</label>
-                  <textarea v-model="event.description" name="" class="form-control" id="event-desc" rows="5"></textarea>
+                  <textarea data-test="event-description" v-model="event.description" name="" class="form-control" id="event-desc" rows="5"></textarea>
                    <small v-if="v$.description.$error" class="text-danger form-error">
                      {{ v$.description.$errors[0].$message }}
                   </small>
