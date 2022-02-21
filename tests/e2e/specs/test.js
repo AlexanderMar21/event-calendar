@@ -13,7 +13,7 @@ describe('Events List', () => {
 
   it('Visits the events list page', () => {
     cy.visit('/events')
-    cy.contains('h1', 'All the coolest events')
+    cy.get('[data-test="events-heading"]').should("be.visible")
   })
 
   it("renders 10 event elements", () => {
@@ -25,7 +25,7 @@ describe('Events List', () => {
 
   it('Visits the "add event" page',() => {
     cy.visit('/events/store')
-    cy.contains('h1', 'Add Event')
+    cy.get('[data-set="add-event"]').should("have.length",1);
   })
 
   it('Submits empty form and looks for eight errors',() => {
@@ -49,7 +49,7 @@ describe('Events List', () => {
     cy.get('#location').type("Vienna");
     cy.get('[data-test="form"]').submit();
     cy.visit('/events');
-    cy.contains('[data-test="event-title"]', 'Test Title Cypress')
+    cy.contains('[data-test="event-title"]', 'Test Title Cypress').should("be.visible");
   })
 
 })

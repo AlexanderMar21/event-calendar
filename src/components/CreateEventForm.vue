@@ -2,7 +2,7 @@
    <div class="container px-4">
       <div class="row">
          <form @submit.prevent="submitForm()" data-test="form" ref="form" class="col-12 col-md-8 offset-md-2 shadow-lg rounded-3 p-4 bg-white">
-            <h1 class="text-primary h-3 py-3">Add Event</h1>
+            <h1 data-set="add-event" class="text-primary h-3 py-3">Add Event</h1>
             <div class="row">
 
                <div class="mb-4 col-12 relative">

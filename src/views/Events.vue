@@ -1,7 +1,7 @@
 <template>
    <section class="container">
       <div class="d-flex justify-content-between align-items-start">
-         <h1 class="display-4 text-primary">All the coolest events</h1>
+         <h1 data-test="events-heading" class="display-4 text-primary">All the coolest events</h1>
          <router-link data-test="add-event-btn" class="btn btn-primary text-white" :to="{ name: 'CreateEvent' }">Add Event</router-link>
       </div>
       <div class="mb-4 col-12 relative col-sm-3">
